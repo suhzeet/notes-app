@@ -66,9 +66,9 @@ function App() {
   };
 
   return (
-    <div className="app font-[cursive]">
+    <div className="app ">
       <header className="header">
-        <h1 className=" text-left font-[cursive] text-4xl font-extrabold mb-8 text-slate-700  flex gap-4 items-center justify-center md:justify-start">
+        <h1 className=" text-left  text-4xl font-bold mb-8 text-slate-700  flex gap-4 items-center justify-center md:justify-start">
           <NotebookPen size={32} />
           Likhit
         </h1>
