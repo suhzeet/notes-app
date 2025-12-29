@@ -27,17 +27,17 @@ function NoteForm({ onSubmit, editingNote, onCancel }) {
     e.preventDefault();
     if (!title.trim() || !content.trim()) return;
 
-    onSubmit({ title, content, color });
+    onSubmit({ ...editingNote, title, content, color });
 
-    if (!editingNote) {
-      setFormData({ title: "", content: "", color: "#ffffff" });
-    }
+    // if (!editingNote) {
+    //   setFormData({ title: "", content: "", color: "#ffffff" });
+    // }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-76 h-90 p-6 flex flex-col rounded-2xl shadow-md mb-10 bg-white/95 backdrop-blur-md border border-white/50"
+      className="text-left  h-90 relative flex flex-col  p-6 rounded-2xl border border-white/50 shadow-md overflow-hidden transition-transform duration-300 ease-in-out hover:shadow-xl"
       style={{ backgroundColor: color }}
     >
       <input
@@ -45,16 +45,16 @@ function NoteForm({ onSubmit, editingNote, onCancel }) {
         placeholder="Title"
         value={title}
         onChange={(e) => updateField("title", e.target.value)}
-        className="w-full py-4 text-xl font-bold bg-transparent outline-none placeholder-gray-400 text-gray-800"
+        className="w-full bg-transparent outline-none placeholder-gray-400  text-xl font-bold text-gray-800 mb-4 wrap-break-word -tracking-[0.3px] leading-[1.3]"
       />
       <textarea
         placeholder="Write your note..."
         value={content}
         onChange={(e) => updateField("content", e.target.value)}
-        className="w-full py-1.5 text-md font-semibold bg-transparent flex-1 outline-none leading-6 placeholder-gray-400 mb-5 text-gray-600"
+        className="w-full  text-md bg-transparent  outline-none  placeholder-gray-400    text-md font-semibold text-gray-600 mb-5 flex-1 wrap-break-word whitespace-pre-wrap leading-7"
         rows="4"
       />
-      <div className=" flex items-center justify-between gap-1 py-2 pt-4 border-t border-black/8">
+      <div className=" flex items-center justify-between gap-1 pt-4 border-t border-black/8">
         <div className=" flex gap-2 items-center justify-center">
           {COLORS.map((colorOption) => (
             <button
