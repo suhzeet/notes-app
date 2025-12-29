@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2, NotebookPen } from "lucide-react";
 import NoteForm from "./components/NoteForm";
 import NoteList from "./components/NoteList";
 import "./App.css";
@@ -66,11 +66,14 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <div className="app font-[cursive]">
       <header className="header">
-        <h1>Notes App</h1>
+        <h1 className=" text-left font-[cursive] text-4xl font-extrabold mb-8 text-slate-700  flex gap-4 items-center justify-center md:justify-start">
+          <NotebookPen size={32} />
+          Likhit
+        </h1>
       </header>
-      <main className="main">
+      <main className="main  ">
         <NoteForm
           key={editingNote?._id || "new"}
           onSubmit={
@@ -91,9 +94,6 @@ function App() {
           />
         )}
       </main>
-      <footer className="footer">
-        <p>3 Days MERN Stack Workshop</p>
-      </footer>
     </div>
   );
 }

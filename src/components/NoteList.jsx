@@ -1,17 +1,12 @@
 import NoteCard from "./NoteCard";
-import "./NoteList.css";
 
 function NoteList({ notes, onEdit, onDelete }) {
   if (notes.length === 0) {
-    return (
-      <div className="empty-state">
-        <p>No notes yet. Create your first note!</p>
-      </div>
-    );
+    return <></>;
   }
 
   return (
-    <div className="note-list">
+    <div className="grid gap-8 grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
       {notes.map((note) => (
         <NoteCard
           key={note.id}
