@@ -29,29 +29,30 @@ function NoteForm({ onSubmit, editingNote, onCancel }) {
 
     onSubmit({ ...editingNote, title, content, color });
 
-    // if (!editingNote) {
-    //   setFormData({ title: "", content: "", color: "#ffffff" });
-    // }
+    if (!editingNote) {
+      setFormData({ title: "", content: "", color: "#ffffff" });
+    }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="text-left  h-90 relative flex flex-col  p-6 rounded-2xl border border-white/50 shadow-md overflow-hidden transition-transform duration-300 ease-in-out hover:shadow-xl"
+      className="text-left  h-90 relative flex flex-col  p-6 rounded-2xl border border-white/50 shadow-md overflow-hidden transition-transform duration-300 ease-in-out hover:shadow-xl scale-102"
       style={{ backgroundColor: color }}
     >
       <input
         type="text"
         placeholder="Title"
         value={title}
-        onChange={(e) => updateField("title", e.target.value)}
-        className="w-full bg-transparent outline-none placeholder-gray-400  text-xl font-bold text-gray-800 mb-4 wrap-break-word -tracking-[0.3px] leading-[1.3]"
+        onChange={(e)
+           => updateField("title", e.target.value)}
+        className="w-full bg-transparent outline-none placeholder-gray-400  text-xl font-bold text-gray-800 mb-2 wrap-break-word -tracking-[0.3px] leading-[1.3]"
       />
       <textarea
         placeholder="Write your note..."
         value={content}
         onChange={(e) => updateField("content", e.target.value)}
-        className="w-full  text-md bg-transparent  outline-none  placeholder-gray-400    text-md font-semibold text-gray-600 mb-5 flex-1 wrap-break-word whitespace-pre-wrap leading-7"
+        className="w-full  text-md bg-transparent  outline-none  placeholder-gray-400    text-lg font-semibold text-gray-600 mb-5 flex-1 wrap-break-word whitespace-pre-wrap leading-7"
         rows="4"
       />
       <div className=" flex items-center justify-between gap-1 pt-4 border-t border-black/8">

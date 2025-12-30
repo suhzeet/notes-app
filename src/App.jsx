@@ -68,26 +68,19 @@ function App() {
   return (
     <div className="app ">
       <header className="header">
-        <h1 className=" text-left  text-4xl font-bold mb-8 text-slate-700  flex gap-2 items-center justify-center md:justify-start">
-          <NotebookPen size={32} />
+        <h1 className=" text-left  text-4xl md:text-5xl font-bold mb-8 text-slate-800  flex gap-4 items-center justify-center md:justify-start">
+          {/* <img src="/logo.png" height={42} width={42} /> */}
           Likhit
         </h1>
       </header>
       <main className="main">
-        {/* <NoteForm
-          key={editingNote?._id || "new"}
-          onSubmit={
-            editingNote ? (note) => updateNote(editingNote._id, note) : addNote
-          }
-          editingNote={editingNote}
-          onCancel={() => setEditingNote(null)}
-        /> */}
         {loading ? (
           <div className="loading absolute top-[40%] right-[45%]">
             <Loader2 className="animate-spin " size={128} />
           </div>
         ) : (
           <NoteList
+            updateNote={updateNote}
             notes={notes}
             onEdit={setEditingNote}
             onDelete={deleteNote}
