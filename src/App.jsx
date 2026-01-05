@@ -80,7 +80,7 @@ function App() {
 
       <main className="main space-y-8">
         {/* CREATE NOTE */}
-        <NoteForm onSubmit={addNote} />
+        {/* <NoteForm onSubmit={addNote} /> */}
 
         {/* NOTES LIST */}
         {loading ? (
@@ -92,6 +92,7 @@ function App() {
             notes={notes}
             updateNote={updateNote}
             onDelete={deleteNote}
+            onAdd={addNote}
           />
         )}
       </main>
