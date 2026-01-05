@@ -1,5 +1,5 @@
-import { Check, Plus, Send, X } from "lucide-react";
-import { useState } from "react";
+import { Check, Send, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const COLORS = [
   "#ffffff",
@@ -12,10 +12,20 @@ const COLORS = [
 
 function NoteForm({ onSubmit, editingNote, onCancel }) {
   const [formData, setFormData] = useState({
-    title: editingNote?.title || "",
-    content: editingNote?.content || "",
-    color: editingNote?.color || "#ffffff",
+    title: "",
+    content: "",
+    color: "#ffffff",
   });
+
+  useEffect(() => {
+    if (editingNote) {
+      setFormData({
+        title: editingNote.title,
+        content: editingNote.content,
+        color: editingNote.color || "#ffffff",
+      });
+    }
+  }, [editingNote]);
 
   const { title, content, color } = formData;
 
@@ -37,40 +47,40 @@ function NoteForm({ onSubmit, editingNote, onCancel }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="text-left  h-90 relative flex flex-col  p-6 rounded-2xl border border-white/50 shadow-md overflow-hidden transition-transform duration-300 ease-in-out hover:shadow-xl scale-102"
+      className="text-left h-90 relative flex flex-col p-6 rounded-2xl border border-white/50 shadow-md overflow-hidden transition-transform duration-300 ease-in-out hover:shadow-xl"
       style={{ backgroundColor: color }}
     >
       <input
         type="text"
         placeholder="Title"
         value={title}
-        onChange={(e)
-           => updateField("title", e.target.value)}
-        className="w-full bg-transparent outline-none placeholder-gray-400  text-xl font-bold text-gray-800 mb-2 wrap-break-word -tracking-[0.3px] leading-[1.3]"
+        onChange={(e) => updateField("title", e.target.value)}
+        className="w-full bg-transparent outline-none placeholder-gray-400 text-xl font-bold text-gray-800 mb-2"
       />
+
       <textarea
         placeholder="Write your note..."
         value={content}
         onChange={(e) => updateField("content", e.target.value)}
-        className="w-full  text-md bg-transparent  outline-none  placeholder-gray-400    text-lg font-semibold text-gray-600 mb-5 flex-1 wrap-break-word whitespace-pre-wrap leading-7"
+        className="w-full text-md bg-transparent outline-none placeholder-gray-400 text-lg font-semibold text-gray-600 mb-5 flex-1 whitespace-pre-wrap leading-7"
         rows="4"
       />
-      <div className=" flex items-center justify-between gap-1 pt-4 border-t border-black/8">
-        <div className=" flex gap-2 items-center justify-center">
-          {COLORS.map((colorOption) => (
+
+      <div className="flex items-center justify-between pt-4 border-t border-black/8">
+        <div className="flex gap-2">
+          {COLORS.map((c) => (
             <button
-              key={colorOption}
+              key={c}
               type="button"
-              className={`w-4 h-4 rounded-sm border border-slate-400 shadow-sm transition-all duration-200 ease-in-out   hover:scale-120 hover:shadow-md ${
-                color === colorOption
-                  ? "border-[#667eea] scale-110 shadow-[0_0_0_3px_rgba(102,126,234,0.3)]"
-                  : ""
+              onClick={() => updateField("color", c)}
+              className={`w-4 h-4 rounded-sm border border-slate-400 ${
+                color === c ? "scale-110" : ""
               }`}
-              style={{ backgroundColor: colorOption }}
-              onClick={() => updateField("color", colorOption)}
+              style={{ backgroundColor: c }}
             />
           ))}
         </div>
+
         <div className="flex gap-2">
           {editingNote && (
             <button
@@ -81,6 +91,7 @@ function NoteForm({ onSubmit, editingNote, onCancel }) {
               <X size={18} />
             </button>
           )}
+
           <button
             type="submit"
             className="p-2 rounded-lg bg-black/6 text-gray-600 flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-green-500/15 hover:text-green-500"
